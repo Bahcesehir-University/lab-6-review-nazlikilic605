@@ -291,13 +291,7 @@ Student findBestStudent(const Student& a, const Student& b) {
 Student findBestStudent(Student arr[], int size) {
 
     // YOUR CODE HERE
-
-    if(size<=0){
-
-        return Student();
-
-    }
-
+ 
     Student best =arr[0];
 
     for(int i =1 ; i<size ; i++){
