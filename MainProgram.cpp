@@ -28,28 +28,6 @@ using namespace std;
 
 // ================================
  
-// -----------------------------------------------------------
-
-// Class: Student
-
-// Represents a university student with name, ID, and GPA.
-
-// This class reviews:
-
-//   - Encapsulation (private data, public interface)
-
-//   - Constructors (default, parameterized)
-
-//   - Destructor
-
-//   - Copy Constructor
-
-//   - Operator Overloading (<<, ==, <)
-
-//   - String operations
-
-// -----------------------------------------------------------
-
 class Student {
 
 private:
@@ -66,11 +44,7 @@ public:
  
     // TODO 1a: Default constructor
 
-    // Set name to "Unknown", id to 0, gpa to 0.0
-
     Student() {
-
-        // YOUR CODE HERE
 
         name = "Unknown";
 
@@ -82,45 +56,33 @@ public:
  
     // TODO 1b: Parameterized constructor
 
-    // Initialize all three member variables from parameters
-
     Student(string n, int i, double g) {
-
-        // YOUR CODE HERE
 
         name = n;
 
-        id= i;
+        id = i;
 
-        gpa= g;
+        gpa = g;
 
     }
  
     // TODO 1c: Copy constructor
 
-    // Create a deep copy of another Student object
-
     Student(const Student& other) {
-
-        // YOUR CODE HERE
 
         name = other.name;
 
-        id= other.id;
+        id = other.id;
 
-        gpa= other.gpa;
+        gpa = other.gpa;
 
     }
  
     // TODO 1d: Destructor
 
-    // Print: "Student [name] destroyed"
-
     ~Student() {
 
-        cout<<"student"<<name<<"destroyerd"<< endl;
-
-        // YOUR CODE HERE
+        cout << "Student " << name << " destroyed" << endl;
 
     }
  
@@ -130,8 +92,6 @@ public:
 
     string getName() const {
 
-        // YOUR CODE HERE
-
         return name;
 
     }
@@ -139,8 +99,6 @@ public:
     // TODO 2b: Getter for id
 
     int getId() const {
-
-        // YOUR CODE HERE
 
         return id;
 
@@ -150,8 +108,6 @@ public:
 
     double getGpa() const {
 
-        // YOUR CODE HERE
-
         return gpa;
 
     }
@@ -160,33 +116,23 @@ public:
  
     // TODO 3a: Setter for name
 
-    // Name must not be empty. If empty, keep current name.
-
     void setName(string n) {
 
-        if(!n.empty()){
+        if (!n.empty()) {
 
-            name=n;
+            name = n;
 
         }
-
-        // YOUR CODE HERE
 
     }
  
     // TODO 3b: Setter for GPA
 
-    // GPA must be between 0.0 and 4.0 (inclusive).
-
-    // If out of range, keep current GPA.
-
     void setGpa(double g) {
 
-        // YOUR CODE HERE
+        if (g >= 0.0 && g <= 4.0) {
 
-        if(g>=0.0 &&g<=4.0){
-
-            gpa=g;
+            gpa = g;
 
         }
 
@@ -196,65 +142,43 @@ public:
  
     // TODO 4: getFormattedName()
 
-    // Return the name in UPPERCASE
-
-    // Hint: loop through each character and use toupper()
-
     string getFormattedName() const {
 
-        // YOUR CODE HERE
+        string result = name;
 
-        string temp = name;
+        for (int i = 0; i < (int)result.size(); i++) {
 
-        for(int i=0 ;i<temp.length();i++){
-
-            temp[i]=toupper(temp[i]);
-
+            result[i] = (char)toupper(result[i]);
 
         }
 
-        return temp;
- 
+        return result;
+
     }
  
     // ----- Task 5: Operator Overloading -----
  
     // TODO 5a: Equality operator (==)
 
-    // Two students are equal if they have the same id
+    bool operator==(const Student& other) const {
 
-    bool operator ==(const Student& other) const {
-
-        // YOUR CODE HERE
-
-    return id==other.id;
-
+        return id == other.id;
 
     }
  
     // TODO 5b: Less-than operator (<)
 
-    // Compare by GPA (lower GPA = "less than")
-
     bool operator<(const Student& other) const {
 
-        // YOUR CODE HERE
-
-     return gpa<other.gpa;
+        return gpa < other.gpa;
 
     }
  
     // TODO 5c: Stream insertion operator (<<)
 
-    // Format: "Student(name, ID: id, GPA: gpa)"
-
-    // Example: "Student(Ali, ID: 101, GPA: 3.5)"
-
     friend ostream& operator<<(ostream& os, const Student& s) {
 
-        // YOUR CODE HERE
-
-        cout<<"student("<<s.name<<",ID;"<<s.id<<", GPA : "<<s.gpa<<")";
+        os << "Student(" << s.name << ", ID: " << s.id << ", GPA: " << s.gpa << ")";
 
         return os;
 
@@ -274,15 +198,13 @@ public:
 
 Student findBestStudent(const Student& a, const Student& b) {
 
-    // YOUR CODE HERE
+    if (b.getGpa() > a.getGpa()) {
 
-    if(b<a){
-
-        return a;
+        return b;
 
     }
 
-    return b;
+    return a;
 
 }
  
@@ -290,21 +212,19 @@ Student findBestStudent(const Student& a, const Student& b) {
 
 Student findBestStudent(Student arr[], int size) {
 
-    // YOUR CODE HERE
- 
-    Student best =arr[0];
+    int bestIndex = 0;
 
-    for(int i =1 ; i<size ; i++){
+    for (int i = 1; i < size; i++) {
 
-        if(best<arr[i]){
+        if (arr[i].getGpa() > arr[bestIndex].getGpa()) {
 
-            best= arr[i];
+            bestIndex = i;
 
         }
 
     }
 
-    return best;
+    return arr[bestIndex];
 
 }
  
